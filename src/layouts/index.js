@@ -1,53 +1,57 @@
-import { Box, Grid } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import TopNavbar from './TopNavbar';
-import Footer from "./Footer"
-import Sidebar from './Sidebar';
-import { useLocation } from 'react-router-dom';
-import { setOpenSidebar } from '../store/actions/layoutActions';
-import { useDispatch } from 'react-redux';
-import { connect } from 'react-redux';
+import { Box, Grid } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import TopNavbar from "./TopNavbar";
+import Footer from "./Footer";
+import Sidebar from "./Sidebar";
+import { useLocation } from "react-router-dom";
+import { setOpenSidebar } from "../store/actions/layoutActions";
+import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
 
-const Layout = ({children, openSidebar}) => {
-
+const Layout = ({ children, openSidebar }) => {
   const location = useLocation();
   const dispatch = useDispatch();
 
   useEffect(() => {
     let locationArray = location.pathname.split("/");
 
-    if(locationArray[1] === 'account')
+    if (
+      locationArray[1] === "account" ||
+      locationArray[1] === "vendor" ||
+      locationArray[1] === "rider"
+    )
       dispatch(setOpenSidebar(true));
-    else
-      dispatch(setOpenSidebar(false));
+    else dispatch(setOpenSidebar(false));
 
-    return(() => dispatch(setOpenSidebar(false)))
-
-  },[location.pathname])
+    return () => dispatch(setOpenSidebar(false));
+  }, [location.pathname]);
 
   return (
     <>
-        <TopNavbar />
-          <Box className={openSidebar ? 'lightBg' : 'whiteBg'} component="div" pt={12}>
-            <Grid container direction="row">
-              { openSidebar &&
-                <Grid item xs={12} md={3} sx={{pl:3}}>
-                  <Sidebar />
-                </Grid>
-              }
-              <Grid item xs={12} md={openSidebar ? 9 : 12} >
-                {children}
-              </Grid>
+      <TopNavbar />
+      <Box
+        className={openSidebar ? "lightBg" : "whiteBg"}
+        component='div'
+        pt={12}>
+        <Grid container direction='row'>
+          {openSidebar && (
+            <Grid item xs={12} md={3} sx={{ pl: 3 }}>
+              <Sidebar />
             </Grid>
-          </Box>
-        <Footer />
+          )}
+          <Grid item xs={12} md={openSidebar ? 9 : 12}>
+            {children}
+          </Grid>
+        </Grid>
+      </Box>
+      <Footer />
     </>
   );
 };
 
-const mapStateToProps = state => {
-  const {openSidebar} = state.Layout;
-  return {openSidebar};
+const mapStateToProps = (state) => {
+  const { openSidebar } = state.Layout;
+  return { openSidebar };
 };
 
-export default connect(mapStateToProps,null)(Layout);
+export default connect(mapStateToProps, null)(Layout);
