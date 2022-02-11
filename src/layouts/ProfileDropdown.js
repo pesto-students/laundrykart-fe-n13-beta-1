@@ -6,11 +6,14 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import IconButton from '@mui/material/IconButton';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import Logout from '@mui/icons-material/Logout';
-import { Divider } from '@mui/material';
+import { Divider, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { customerProfileMenu } from '../utilis/profileDropdownMenu';
 
 const ProfileDropdown = () => {
     const [anchorEl, setAnchorEl] = useState(null);
+    const profileMenu = customerProfileMenu;
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -23,12 +26,15 @@ const ProfileDropdown = () => {
         <IconButton
         onClick={handleClick}
         size="small"
-        sx={{ ml: 2 }}
+        sx={{ ml: 2, borderRadius: 0 }}
         aria-controls={open ? 'account-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         >
             <Avatar sx={{ width: 40, height: 40 }} />
+            <Typography sx={{fontSize: 13, fontWeight: 'bold', mx: 1 }}>
+                Tejal Ganvir &nbsp;<KeyboardArrowDownIcon sx={{height: 15, width: 15}} />
+            </Typography>
         </IconButton>
 
         <Menu
@@ -66,19 +72,26 @@ const ProfileDropdown = () => {
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-            <MenuItem component={Link} to="/account/dashboard" >
-                    <ListItemIcon>
-                        <DashboardIcon fontSize="small" />
-                    </ListItemIcon>
-                    Dashboard
-            </MenuItem>
-            <Divider />
+            {
+                profileMenu.map((menu, idx) => (
+                    <>
+                        <MenuItem component={Link} to={menu.link} sx={{minWidth: 150, textAlign: 'center'}} >
+                            <ListItemIcon>
+                                {menu.icon}
+                            </ListItemIcon>
+                            {menu.label}
+                        </MenuItem>
+                        {(profileMenu.length - 1 > idx) && <Divider />}
+                    </>
+                ))
+            }
+            {/* <Divider />
             <MenuItem component={Link} to="/account/logout">
                 <ListItemIcon>
                     <Logout fontSize="small" />
                 </ListItemIcon>
                 Logout
-            </MenuItem>
+            </MenuItem> */}
         </Menu>
       </React.Fragment>
   );
