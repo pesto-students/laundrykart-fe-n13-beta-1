@@ -1,13 +1,8 @@
 import React, { useRef, useState } from 'react';
 import Map, {Marker} from 'react-map-gl';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import styles from './mapbox.module.css';
 import SearchAutocomplete from '../SearchAutocomplete/SearchAutocomplete';
 import { fetchJSON } from '../../services/api';
 import { MAPBOX_TOKEN } from '../../constants/constant';
@@ -18,7 +13,7 @@ const MapboxModal = (props) => {
     const [currlong, setCurrLong] = useState(78.9629);
     const [currlat, setCurrLat] = useState(20.5937);
     const [autoOpen, setAutoOpen] = useState(false);
-    const [options, setOptions] = useState();
+    const [options, setOptions] = useState([]);
     const [featureData, setFeatureData] = useState();
 
     const onMarkerDragEnd = ({lngLat}) => {

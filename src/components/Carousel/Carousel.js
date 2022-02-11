@@ -2,8 +2,6 @@ import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MobileStepper from '@mui/material/MobileStepper';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
@@ -35,7 +33,7 @@ const images = [
   },
 ];
 
-function SwipeableTextMobileStepper(props) {
+const Carousel = (props) => {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = images.length;
@@ -74,7 +72,7 @@ function SwipeableTextMobileStepper(props) {
         enableMouseEvents
       >
         {images.map((step, index) => (
-          <div key={step.label}>
+          <div key={`laundry-carousel-${index}`}>
             {Math.abs(activeStep - index) <= 2 ? (
               <Box
                 component="img"
@@ -125,4 +123,4 @@ function SwipeableTextMobileStepper(props) {
   );
 }
 
-export default SwipeableTextMobileStepper;
+export default Carousel;

@@ -27,7 +27,6 @@ const SearchLaundry = () => {
                     </Paper>
                 </Container>
             </Box>
-            <MapboxModal />
             <Box className='container flexSpaceCenter' sx={{py: 3}}>
                 <Grid container direction="row" spacing={2}>
                     <Grid item xs={12} sm={6} md={3}>

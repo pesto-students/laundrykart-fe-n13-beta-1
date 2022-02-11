@@ -74,7 +74,7 @@ const ProfileDropdown = () => {
         >
             {
                 profileMenu.map((menu, idx) => (
-                    <>
+                    <div key={`profile-dropdown-${menu.label}`}>
                         <MenuItem component={Link} to={menu.link} sx={{minWidth: 150, textAlign: 'center'}} >
                             <ListItemIcon>
                                 {menu.icon}
@@ -82,16 +82,9 @@ const ProfileDropdown = () => {
                             {menu.label}
                         </MenuItem>
                         {(profileMenu.length - 1 > idx) && <Divider />}
-                    </>
+                    </div>
                 ))
             }
-            {/* <Divider />
-            <MenuItem component={Link} to="/account/logout">
-                <ListItemIcon>
-                    <Logout fontSize="small" />
-                </ListItemIcon>
-                Logout
-            </MenuItem> */}
         </Menu>
       </React.Fragment>
   );
