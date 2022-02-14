@@ -31,7 +31,7 @@ const Routes = () => {
         <Route path='/login' exact element={<Login />} />
         <Route path='/register' exact element={<Register />} />
         <Route path='/forgot-password' exact element={<ForgotPassword />} />
-        <Route path='/account/logout' exact element={<Logout />} />
+        <Route path='/logout' exact element={<Logout />} />
         <Route path='/account/dashboard' element={<Dashboard />} />
         <Route path='/account/nearest-laundry' element={<NearestLaundry />} />
         <Route path='/account/orders' element={<Orders />} />

@@ -6,7 +6,7 @@ import { getLoginUser } from "../services/Login/loginservice";
 export function* LoginAsync(action) {
   try {
     const user = yield getLoginUser(action.payload);
-    yield put(LoginSuccess(user));
+    yield put(LoginSuccess(user.data));
   } catch (error) {
     yield put(LoginFailed(error.message));
   }
