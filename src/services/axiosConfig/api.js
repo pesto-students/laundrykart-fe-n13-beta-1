@@ -31,7 +31,6 @@ const postJSON = (url, options = {}, type = '') => {
         .catch(error => {
             throw error;
         });
-        
 };
 
 export { fetchJSON, postJSON };
