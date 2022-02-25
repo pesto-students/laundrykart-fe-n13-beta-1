@@ -22,6 +22,8 @@ import OrderDetails from "../pages/Vendor/orders";
 import RiderDetails from "../pages/Vendor/riders";
 import VendorServices from "../pages/Vendor/services";
 import LaundryDetails from "../pages/LaundryDetails";
+import AddRaider from "../pages/Vendor/riders/AddRider";
+import AddService from "../pages/Vendor/services/Addservice";
 
 const Routes = () => {
   return (
@@ -42,7 +44,9 @@ const Routes = () => {
 
         <Route path='/vendor/dashboard' element={<VendorDashboard />} />
         <Route path='/vendor/services' element={<VendorServices />} />
+        <Route path='/vendor/create/services' element={<AddService />} />
         <Route path='/vendor/riders' element={<RiderDetails />} />
+        <Route path='/vendor/create/riders' element={<AddRaider />} />
         <Route path='/vendor/orders' element={<OrderDetails />} />
         <Route path='/vendor/history' element={<HistoryDetails />} />
         <Route path='/rider/history' element={<RiderHistoryDetails />} />
