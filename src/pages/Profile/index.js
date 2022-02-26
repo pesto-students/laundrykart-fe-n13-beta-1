@@ -44,6 +44,7 @@ const Profile = () => {
                         </tbody>
                     </table>
                 </Box>
+                
             </Container>
             <EditDailouge
                 size="sm"

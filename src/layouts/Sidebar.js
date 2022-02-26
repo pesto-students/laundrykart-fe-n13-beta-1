@@ -10,9 +10,14 @@ import { customerMenu, riderMenu, vendorMenu } from "../utilis/sidebarMenu";
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import userImg from "../assets/img/user-1.jpg";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../store/selector/login.selectors";
+import { connect } from "react-redux";
 
-const Sidebar = (props) => {
+const Sidebar = (userDetails) => {
   const [menuSelected, setMenuSelected] = useState("Dashboard");
+
+  const role = userDetails.userDetails.currentUser.role;
   return (
     <Paper
       className={styles.sidebar_container}
@@ -35,23 +40,42 @@ const Sidebar = (props) => {
           </MenuItem>
         </Link>
         <Divider />
-        {vendorMenu.map((item, idx) => (
-          <Link
-            key={`menu-item${idx}`}
-            to={item.link}
-            className={`${styles.sidebar_menu_item} ${styles.active}`}>
-            <MenuItem
-              sx={{ p: 2 }}
-              selected={menuSelected === item.label}
-              onClick={() => setMenuSelected(item.label)}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText>{item.label}</ListItemText>
-            </MenuItem>
-          </Link>
-        ))}
+
+        {role == "rider" &&
+          riderMenu.map((item, idx) => (
+            <Link
+              key={`menu-item${idx}`}
+              to={item.link}
+              className={`${styles.sidebar_menu_item} ${styles.active}`}>
+              <MenuItem
+                sx={{ p: 2 }}
+                selected={menuSelected === item.label}
+                onClick={() => setMenuSelected(item.label)}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText>{item.label}</ListItemText>
+              </MenuItem>
+            </Link>
+          ))}
+        {role == "laundry" &&
+          vendorMenu.map((item, idx) => (
+            <Link
+              key={`menu-item${idx}`}
+              to={item.link}
+              className={`${styles.sidebar_menu_item} ${styles.active}`}>
+              <MenuItem
+                sx={{ p: 2 }}
+                selected={menuSelected === item.label}
+                onClick={() => setMenuSelected(item.label)}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText>{item.label}</ListItemText>
+              </MenuItem>
+            </Link>
+          ))}
       </MenuList>
     </Paper>
   );
 };
-
-export default Sidebar;
+const currentUser = createStructuredSelector({
+  userDetails: selectCurrentUser,
+});
+export default connect(currentUser)(Sidebar);

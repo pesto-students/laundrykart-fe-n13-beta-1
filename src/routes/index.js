@@ -24,6 +24,11 @@ import VendorServices from "../pages/Vendor/services";
 import LaundryDetails from "../pages/LaundryDetails";
 import AddRaider from "../pages/Vendor/riders/AddRider";
 import AddService from "../pages/Vendor/services/Addservice";
+import EditService from "../pages/Vendor/services/EditService";
+import AssignOrders from "../pages/Vendor/orders/AssignOrder";
+import RiderDashboard from "../pages/Rider/dashboard";
+import RiderProfile from "../pages/Rider/profile";
+import LaundryInfo from "../pages/Vendor/profileScreen/laundryinfo";
 
 const Routes = () => {
   return (
@@ -44,13 +49,19 @@ const Routes = () => {
 
         <Route path='/vendor/dashboard' element={<VendorDashboard />} />
         <Route path='/vendor/services' element={<VendorServices />} />
+        <Route path='/vendor/laundryinfo' element={<LaundryInfo />} />
         <Route path='/vendor/create/services' element={<AddService />} />
+        <Route path='/vendor/services/:serviceId' element={<EditService />} />
         <Route path='/vendor/riders' element={<RiderDetails />} />
         <Route path='/vendor/create/riders' element={<AddRaider />} />
         <Route path='/vendor/orders' element={<OrderDetails />} />
+        <Route path='/vendor/orders/:orderId' element={<AssignOrders />} />
         <Route path='/vendor/history' element={<HistoryDetails />} />
+        <Route path='/rider/dashboard' element={<RiderDashboard />} />
+        <Route path='/rider/profile' element={<RiderProfile />} />
         <Route path='/rider/history' element={<RiderHistoryDetails />} />
         <Route path='/rider/orders' element={<RiderOrderDetails />} />
+        <Route path='/rider/orders/:orderId' element={<PickupDetails />} />
         <Route path='/rider/pickup' element={<PickupDetails />} />
 
         {/* <Route path="/product/:id" element={<ProductDetails />} />
