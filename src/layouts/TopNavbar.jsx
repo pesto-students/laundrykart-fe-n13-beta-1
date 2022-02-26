@@ -2,14 +2,20 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link as SlideLink } from "react-scroll";
 // Components
-import Sidebar from "../Nav/Sidebar";
-import Backdrop from "../Elements/Backdrop";
+import Sidebar from "../components/Nav/Sidebar";
+import Backdrop from "../components/Elements/Backdrop";
 // Assets
-import BurgerIcon from "../../assets/svg/BurgerIcon";
-import LogoIcon from "../LogoIcon";
-import { Link } from "react-router-dom";
+import BurgerIcon from "../assets/svg/BurgerIcon";
+import LogoIcon from "../components/LogoIcon";
+import { Link, NavLink } from "react-router-dom";
+import { Button, IconButton } from "@mui/material";
+import ProfileDropdown from "./ProfileDropdown";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../store/selector/login.selectors";
+import { connect } from "react-redux";
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
-export default function TopNavbar() {
+const TopNavbar = ({loginstatus}) => {
   const [y, setY] = useState(window.scrollY);
   const [sidebarOpen, toggleSidebar] = useState(false);
 
@@ -27,7 +33,7 @@ export default function TopNavbar() {
       {sidebarOpen && <Backdrop toggleSidebar={toggleSidebar} />}
       <Wrapper className="flexCenter animate whiteBg" style={y > 100 ? { height: "60px" } : { height: "80px" }}>
         <NavInner className="container flexSpaceCenter">
-          <Link to="/" className="pointer flexNullCenter"  smooth={true}>
+          <Link to="/" className="pointer flexNullCenter">
             <LogoIcon width={50} height={50} />
             <h1 style={{ marginLeft: "15px" }} className="font20 extraBold">
               LaundryKart
@@ -38,46 +44,71 @@ export default function TopNavbar() {
           </BurderWrapper>
           <UlWrapper className="flexNullCenter">
             <li className="semiBold font15 pointer">
-              <SlideLink activeClass="active" style={{ padding: "10px 15px" }} to="home" spy={true} smooth={true} offset={-80}>
+              <NavLink style={{ padding: "10px 15px" }} to="/">
                 Home
-              </SlideLink>
+              </NavLink>
             </li>
             <li className="semiBold font15 pointer">
+              <NavLink style={{ padding: "10px 15px" }} to="/laundry">
+                Laundry
+              </NavLink>
+            </li>
+            {/* <li className="semiBold font15 pointer">
               <SlideLink activeClass="active" style={{ padding: "10px 15px" }} to="services" spy={true} smooth={true} offset={-80}>
                 Services
               </SlideLink>
-            </li>
+            </li> */}
             {/* <li className="semiBold font15 pointer">
               <SlideLink activeClass="active" style={{ padding: "10px 15px" }} to="projects" spy={true} smooth={true} offset={-80}>
                 Projects
               </SlideLink>
             </li> */}
-            <li className="semiBold font15 pointer">
+            {/* <li className="semiBold font15 pointer">
               <SlideLink activeClass="active" style={{ padding: "10px 15px" }} to="blog" spy={true} smooth={true} offset={-80}>
                 Blog
               </SlideLink>
-            </li>
+            </li> */}
             {/* <li className="semiBold font15 pointer">
               <SlideLink activeClass="active" style={{ padding: "10px 15px" }} to="pricing" spy={true} smooth={true} offset={-80}>
                 Pricing
               </SlideLink>
             </li> */}
-            <li className="semiBold font15 pointer">
+            {/* <li className="semiBold font15 pointer">
               <SlideLink activeClass="active" style={{ padding: "10px 15px" }} to="contact" spy={true} smooth={true} offset={-80}>
                 Contact
               </SlideLink>
-            </li>
+            </li> */}
           </UlWrapper>
           <UlWrapperRight className="flexNullCenter">
+            {/* <li className="semiBold font15 pointer flexCenter">
+              { loginstatus.isLogin ?
+                (loginstatus.role === 'user') &&
+                <IconButton color="primary" aria-label="Wallet">
+                  <AccountBalanceWalletIcon fontSize="large" />
+                </IconButton>
+                :
+                <Button 
+                  sx={{borderRadius: 4, px: 3}}
+                  variant="outlined" 
+                  component={Link} 
+                  to="/login" >
+                  Schedule a Pickup
+                </Button>
+              }
+            </li> */}
+            { !loginstatus.isLogin &&
+              <li className="semiBold font15 pointer flexCenter">
+                <Button 
+                  sx={{borderRadius: 4, px: 3}}
+                  variant="outlined" 
+                  component={Link} 
+                  to="/login" >
+                  Schedule a Pickup
+                </Button>
+              </li>
+            }
             <li className="semiBold font15 pointer">
-              <Link to="/account/login" style={{ padding: "10px 30px 10px 0" }}>
-                Log in
-              </Link>
-            </li>
-            <li className="semiBold font15 pointer flexCenter">
-              <Link to="/" className="radius8 lightBg" style={{ padding: "10px 15px" }}>
-                Get Started
-              </Link>
+              <ProfileDropdown user={loginstatus} />
             </li>
           </UlWrapperRight>
         </NavInner>
@@ -85,6 +116,12 @@ export default function TopNavbar() {
     </>
   );
 }
+
+const userdetails = createStructuredSelector({
+  loginstatus: selectCurrentUser,
+});
+
+export default connect(userdetails)(TopNavbar);
 
 const Wrapper = styled.nav`
   width: 100%;

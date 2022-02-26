@@ -1,44 +1,35 @@
 import React from "react";
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import './App.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import 'react-toastify/dist/ReactToastify.css';
 import Routes from "./routes";
 import store from "./store/store";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import theme from "./assets/theme";
+import { ThemeProvider } from '@mui/material/styles';
+import { ToastContainer } from 'react-toastify';
+import './App.css';
 
 function App() {
 
-  const THEME = createTheme({
-    typography: {
-     "fontFamily": `"Nunito", "Arial", sans-serif`,
-     "fontSize": 16,
-     "fontWeightLight": 300,
-     "fontWeightRegular": 400,
-     "fontWeightMedium": 500
-    },
-    palette: {
-      primary: {
-        light: '#f75daf',
-        main: '#ec0883',
-        dark: '#b60563',
-        contrastText: '#fff',
-      },
-      secondary: {
-        light: '#a474f1',
-        main: '#7620FF',
-        dark: '#4807af',
-        contrastText: '#fff',
-      },
-    },
- });
-
   return (
-    <ThemeProvider theme={THEME}>
+    <ThemeProvider theme={theme}>
       <Provider store={store}>
         <BrowserRouter>
           <Routes />
         </BrowserRouter>
       </Provider>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </ThemeProvider>
   );
 }

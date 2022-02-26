@@ -9,8 +9,12 @@ import AddImage1 from "../../assets/img/add/1.jpg";
 import AddImage2 from "../../assets/img/add/2.jpg";
 import AddImage3 from "../../assets/img/add/3.jpg";
 import AddImage4 from "../../assets/img/add/4.jpg";
+import { useNavigate } from "react-router-dom";
 
-export default function Services() {
+const Services = () => {
+
+  const navigate = useNavigate();
+
   return (
     <Wrapper id="services">
       {/* <div className="lightBg" style={{ padding: "50px 0" }}>
@@ -18,7 +22,7 @@ export default function Services() {
           <ClientSlider />
         </div>
       </div> */}
-      <div className="whiteBg" style={{ padding: "60px 0" }}>
+      <div className="whiteBg" style={{ paddingTop: "60px" }}>
         <div className="container">
           <HeaderInfo>
             <h1 className="font40 extraBold">How it Works?</h1>
@@ -68,10 +72,10 @@ export default function Services() {
                 </p>
                 <ButtonsRow className="flexNullCenter" style={{ margin: "30px 0"}}>
                   <div style={{ width: "190px" }}>
-                    <FullButton title="Get Started" action={() => alert("clicked")} />
+                    <FullButton title="Get Started" action={() => navigate('/register')} />
                   </div>
                   <div style={{ width: "190px", marginLeft: "15px" }}>
-                    <FullButton title="Contact Us" action={() => alert("clicked")} border />
+                    <FullButton title="Contact Us" action={() => navigate('/#contact')} border />
                   </div>
                 </ButtonsRow>
               </AddLeft>
@@ -103,6 +107,8 @@ export default function Services() {
   );
 }
 
+export default Services;
+
 const Wrapper = styled.section`
   width: 100%;
 `;
@@ -127,7 +133,7 @@ const HeaderInfo = styled.div`
   }
 `;
 const Advertising = styled.div`
-  margin: 80px 0;
+  //margin: 80px 0;
   padding: 100px 0;
   position: relative;
   @media (max-width: 1160px) {
