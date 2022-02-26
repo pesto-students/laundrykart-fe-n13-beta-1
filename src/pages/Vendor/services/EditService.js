@@ -4,22 +4,55 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { Container, Stack } from "@mui/material";
-import AssignService from "../../../components/Vendor/AssignService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../../store/selector/login.selectors";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { ServiceCreateStart } from "../../../store/actions/vendorServiceActions";
+import { useEffect } from "react";
+import { postJSON } from "../../../services/axiosConfig/api";
+import { useState } from "react";
 
-const AddService = (vendordetails) => {
+const EditService = (vendordetails) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const isSaved = useSelector((state) => state.vendorServices.isSaved);
+  const [service, setService] = useState({});
+  const { serviceId } = useParams();
 
-  console.log(isSaved);
+  const [itemName, setItemName] = useState("");
+  const [pressPrice, setPressPrice] = useState("");
+  const [dryCleanPrice, setDryCleanPrice] = useState("");
+  const [laundryPrice, setLaundryPrice] = useState("");
+
+  useEffect(() => {
+    const response = postJSON("/functions/getServicesById", {
+      serviceId: serviceId,
+    });
+    response.then((data) => setService(data.result));
+  }, []);
+
+  const data = service;
+
+  const laundryId = vendordetails.vendordetails.currentUser.objectId;
+
+  const itemnameHandler = (event) => {
+    setItemName(event.target.value);
+  };
+  const pressPriceHandler = (event) => {
+    setPressPrice(event.target.value);
+  };
+  const dryCleanPriceHandler = (event) => {
+    setDryCleanPrice(event.target.value);
+  };
+  const laundryPriceHandler = (event) => {
+    setLaundryPrice(event.target.value);
+  };
+
+  //console.log(data.itemName);
 
   const validationSchema = yup.object({
     itemName: yup
@@ -36,21 +69,20 @@ const AddService = (vendordetails) => {
       .required("press price is required"),
   });
 
-  const laundryId = vendordetails.vendordetails.currentUser.objectId;
-
   const formik = useFormik({
     initialValues: {
-      itemName: "",
-      laundryPrice: "",
-      dryCleanPrice: "",
-      pressPrice: "",
+      itemName: service && service.itemName ? service.itemName : '',
+      laundryPrice: service && service.laundryPrice ? service.laundryPrice : '',
+      dryCleanPrice: service && service.dryCleanPrice ? service.dryCleanPrice : '',
+      pressPrice: service && service.pressPrice ? service.pressPrice : '',
     },
-
+    enableReinitialize: true,
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      const data = { ...values, laundryId: laundryId };
-      console.log(data);
-      dispatch(ServiceCreateStart(data));
+      console.log(values);
+      // const data = { ...values, laundryId: laundryId };
+      // console.log(data);
+      // dispatch(ServiceCreateStart(data));
     },
   });
 
@@ -64,10 +96,10 @@ const AddService = (vendordetails) => {
               variant='h6'
               component='h2'
               sx={{ mb: 3 }}>
-              Add a new Service
+              Edit Service
             </Typography>
             <Stack spacing={2}>
-              <TextField
+            <TextField
                 fullWidth
                 id='service-name'
                 label='Item Name'
@@ -136,9 +168,7 @@ const AddService = (vendordetails) => {
                   onClick={() => navigate("/vendor/services")}>
                   Cancel
                 </Button>
-                <Button variant='contained' onClick={formik.handleSubmit}>
-                  Save
-                </Button>
+                <Button variant='contained' onClick={formik.handleSubmit}>Save</Button>
               </Stack>
             </Stack>
           </Box>
@@ -151,4 +181,4 @@ const AddService = (vendordetails) => {
 const laundrydetails = createStructuredSelector({
   vendordetails: selectCurrentUser,
 });
-export default connect(laundrydetails)(AddService);
+export default connect(laundrydetails)(EditService);
