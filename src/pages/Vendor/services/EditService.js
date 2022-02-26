@@ -23,6 +23,11 @@ const EditService = (vendordetails) => {
   const [service, setService] = useState({});
   const { serviceId } = useParams();
 
+  const [itemName, setItemName] = useState("");
+  const [pressPrice, setPressPrice] = useState("");
+  const [dryCleanPrice, setDryCleanPrice] = useState("");
+  const [laundryPrice, setLaundryPrice] = useState("");
+
   useEffect(() => {
     const response = postJSON("/functions/getServicesById", {
       serviceId: serviceId,
@@ -31,42 +36,23 @@ const EditService = (vendordetails) => {
   }, []);
 
   const data = service;
-  const itemName = data.itemName;
 
-  console.log(itemName);
-
-  const validationSchema = yup.object({
-    itemName: yup
-      .string("Enter the item name")
-      .required("Item Name is required"),
-    laundryPrice: yup
-      .string("Enter the laundryPrice")
-      .required("Laundry Price is required"),
-    dryCleanPrice: yup
-      .string("Enter the dryclean price")
-      .required("dry clean price is required"),
-    pressPrice: yup
-      .string("Enter the Press price")
-      .required("press price is required"),
-  });
-  console.log(serviceId);
   const laundryId = vendordetails.vendordetails.currentUser.objectId;
 
-  const formik = useFormik({
-    initialValues: {
-      itemName: itemName,
-      laundryPrice: data.laundryPrice,
-      dryCleanPrice: data.dryCleanPrice,
-      pressPrice: data.pressPrice,
-    },
+  const itemnameHandler = (event) => {
+    setItemName(event.target.value);
+  };
+  const pressPriceHandler = (event) => {
+    setPressPrice(event.target.value);
+  };
+  const dryCleanPriceHandler = (event) => {
+    setDryCleanPrice(event.target.value);
+  };
+  const laundryPriceHandler = (event) => {
+    setLaundryPrice(event.target.value);
+  };
 
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      const data = { ...values, serviceId: serviceId };
-      console.log(data);
-      //   dispatch(ServiceCreateStart(data));
-    },
-  });
+  console.log(data.itemName);
 
   return (
     <div>
@@ -78,66 +64,42 @@ const EditService = (vendordetails) => {
               variant='h6'
               component='h2'
               sx={{ mb: 3 }}>
-              Add a new Service
+              Edit Service
             </Typography>
             <Stack spacing={2}>
               <TextField
                 fullWidth
                 id='service-name'
-                label='Item Name'
                 variant='outlined'
-                value={formik.values.itemName}
-                onChange={formik.handleChange("itemName")}
-                error={
-                  formik.touched.itemName && Boolean(formik.errors.itemName)
-                }
-                helperText={formik.touched.itemName && formik.errors.itemName}
+                value={data.itemName}
+                helperText={"Enter Item Name"}
+                onChange={itemnameHandler}
               />
 
               <TextField
                 fullWidth
                 id='price'
-                label='Press Price'
                 variant='outlined'
-                value={formik.values.pressPrice}
-                onChange={formik.handleChange("pressPrice")}
-                error={
-                  formik.touched.pressPrice && Boolean(formik.errors.pressPrice)
-                }
-                helperText={
-                  formik.touched.pressPrice && formik.errors.pressPrice
-                }
+                value={pressPrice}
+                onChange={pressPriceHandler}
+                helperText={"Enter Press Price"}
               />
               <TextField
                 fullWidth
                 id='price'
-                label='dryclean Price'
                 variant='outlined'
-                value={formik.values.dryCleanPrice}
-                onChange={formik.handleChange("dryCleanPrice")}
-                error={
-                  formik.touched.dryCleanPrice &&
-                  Boolean(formik.errors.dryCleanPrice)
-                }
-                helperText={
-                  formik.touched.dryCleanPrice && formik.errors.dryCleanPrice
-                }
+                value={dryCleanPrice}
+                onChange={dryCleanPriceHandler}
+                helperText={"Enter Dry Clean Price"}
               />
 
               <TextField
                 fullWidth
                 id='price'
-                label='laundry Price'
                 variant='outlined'
-                value={formik.values.laundryPrice}
-                onChange={formik.handleChange("laundryPrice")}
-                error={
-                  formik.touched.laundryPrice &&
-                  Boolean(formik.errors.laundryPrice)
-                }
-                helperText={
-                  formik.touched.laundryPrice && formik.errors.laundryPrice
-                }
+                value={laundryPrice}
+                onChange={laundryPriceHandler}
+                helperText={"Enter Laundry Price"}
               />
 
               <Stack
@@ -150,9 +112,7 @@ const EditService = (vendordetails) => {
                   onClick={() => navigate("/vendor/services")}>
                   Cancel
                 </Button>
-                <Button variant='contained' onClick={formik.handleSubmit}>
-                  Save
-                </Button>
+                <Button variant='contained'>Save</Button>
               </Stack>
             </Stack>
           </Box>

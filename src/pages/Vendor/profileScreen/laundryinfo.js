@@ -3,9 +3,18 @@ import MapboxModal from "../../../components/Mapbox/MapboxModal";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useState } from "react";
+import LocationAutocomplete from "../../../components/SearchAutocomplete/LocationAutocomplete";
 
-const LaundryInfo = () => {
+const LaundryInfo = ({
+  profFirstName,
+  profLastName,
+  profileImg,
+  userObjectId,
+  hide,
+}) => {
   const [open, setOpen] = useState(false);
+  const [imgUrl, setImgUrl] = useState(profileImg);
+  const [imageData, setImageData] = useState();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -13,6 +22,19 @@ const LaundryInfo = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const onSelectFile = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      const name = file.name;
+      setImageData(e.target.files[0]);
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+        setImgUrl(reader.result);
+      });
+      reader.readAsDataURL(e.target.files[0]);
+    }
   };
 
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -35,7 +57,7 @@ const LaundryInfo = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      //   dispatch(AddProfileStart(values));
+      // dispatch(AddProfileStart(values));
     },
   });
   return (
@@ -47,37 +69,45 @@ const LaundryInfo = () => {
           alignItems='flex-start'
           spacing={1}
           sx={{ px: 5, mb: 3 }}>
-          <Input
-            accept='image/*'
-            id='contained-button-file'
-            multiple
-            type='file'
-          />
-          <Input
-            accept='image/*'
-            id='contained-button-file'
-            multiple
-            type='file'
-          />
-          <Input
-            accept='image/*'
-            id='contained-button-file'
-            multiple
-            type='file'
-          />
-          <Input
-            accept='image/*'
-            id='contained-button-file'
-            multiple
-            type='file'
-          />
+          <Button variant='outlined' component='label'>
+            Set Banner image
+            <input
+              type='file'
+              onChange={(e) => onSelectFile(e)}
+              accept='image/x-png,image/jpeg,image/jpg,image/png'
+              hidden
+            />
+          </Button>
+          <Button variant='outlined' component='label'>
+            Set image 1
+            <input
+              type='file'
+              onChange={(e) => onSelectFile(e)}
+              accept='image/x-png,image/jpeg,image/jpg,image/png'
+              hidden
+            />
+          </Button>
+          <Button variant='outlined' component='label'>
+            Set image 2
+            <input
+              type='file'
+              onChange={(e) => onSelectFile(e)}
+              accept='image/x-png,image/jpeg,image/jpg,image/png'
+              hidden
+            />
+          </Button>
+          <Button variant='outlined' component='label'>
+            Set image 3
+            <input
+              type='file'
+              onChange={(e) => onSelectFile(e)}
+              accept='image/x-png,image/jpeg,image/jpg,image/png'
+              hidden
+            />
+          </Button>
         </Stack>
-        <Stack
-          direction='row'
-          justifyContent='space-around'
-          alignItems='flex-start'
-          sx={{ px: 5 }}
-          spacing={1}>
+
+        <div className='form-control-area'>
           <TextField
             fullWidth
             id='name'
@@ -88,14 +118,11 @@ const LaundryInfo = () => {
             helperText={formik.touched.name && formik.errors.name}
             variant='outlined'
           />
-          <TextField
-            fullWidth
-            id='address'
-            label='Address'
-            onChange={formik.handleChange("address")}
-            variant='outlined'
-            name='address'
-          />
+        </div>
+        <div className='form-control-area'>
+          <LocationAutocomplete addressFunc={{ address, setAddress }} />
+        </div>
+        <div className='form-control-area'>
           <TextField
             fullWidth
             id='about'
@@ -120,14 +147,13 @@ const LaundryInfo = () => {
             value={formik.values.long}
             onChange={formik.handleChange("long")}
           />
-        </Stack>
+        </div>
         <Stack
           sx={{ mb: 6 }}
           direction='row'
           justifyContent='center'
           alignItems='flex-start'
           spacing={2}>
-          <Button variant='outlined'>fetch from map</Button>
           <Button variant='outlined' onClick={formik.handleSubmit}>
             Save
           </Button>
