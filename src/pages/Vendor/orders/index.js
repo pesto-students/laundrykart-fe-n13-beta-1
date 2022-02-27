@@ -18,7 +18,7 @@ const OrderDetails = (vendordetails) => {
     const response = postJSON(
       "/functions/getVendorOrderList",
       {
-        laundryId: "sv8OXNs8lk",
+        laundryId: laundryId,
       },
       [],
     );
