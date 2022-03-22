@@ -10,12 +10,13 @@
 ## Introduction      
 LaundryKart is committed to offering our customers the highest quality dry cleaning and laundry services at fair prices. Our goal is to deliver a convenient and easy to use solution while providing excellent customer service.
 
--Live demo [_here_](https://laundrykart02.netlify.app/).
+## Demo
+-LaundryKart [_here_](https://laundrykart02.netlify.app/).
 
 Frontend is hosted on Netlify.
 Backend is deployed to Parse API.
 
-## Setup
+## Installation
 Requires [Node.js](https://nodejs.org/) to run (v14.15.0+).
 
 Install the dependencies and open the terminal and then run the following command one by one.
@@ -31,7 +32,7 @@ Install the dependencies and open the terminal and then run the following comman
  ```
 You should be able to see the landing page.
 
-## Technologies used to build this project
+## Technology Stack
 ![Node.js **v14.15.0**](https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)\
  ![React JS](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)\
  ![Redux](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)\
@@ -66,6 +67,7 @@ You should be able to see the landing page.
 
  
 <a href="https://www.linkedin.com/in/tejal-ganvir-ba4340163/">Tejal Ganvir</a>
+<a href="https://www.linkedin.com/in/gopi-m-3112ba115/">Gopi Kannan</a>
 
 
 ## Community
