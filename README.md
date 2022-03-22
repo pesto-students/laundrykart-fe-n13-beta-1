@@ -11,10 +11,10 @@
 LaundryKart is committed to offering our customers the highest quality dry cleaning and laundry services at fair prices. Our goal is to deliver a convenient and easy to use solution while providing excellent customer service.
 
 ## Demo
--LaundryKart [_here_](https://laundrykart02.netlify.app/).
+-[_LaundryKart_](https://laundrykart02.netlify.app/).
 
-Frontend is hosted on Netlify.
-Backend is deployed to Parse API.
+- Frontend is hosted on Netlify.
+- Backend is deployed to Parse API.
 
 ## Installation
 Requires [Node.js](https://nodejs.org/) to run (v14.15.0+).
@@ -66,8 +66,8 @@ You should be able to see the landing page.
 ## Contributors ✨
 
  
-<a href="https://www.linkedin.com/in/tejal-ganvir-ba4340163/">Tejal Ganvir</a>
-<a href="https://www.linkedin.com/in/gopi-m-3112ba115/">Gopi Kannan</a>
+- <a href="https://www.linkedin.com/in/tejal-ganvir-ba4340163/">Tejal Ganvir</a>
+- <a href="https://www.linkedin.com/in/gopi-m-3112ba115/">Gopi Kannan</a>
 
 
 ## Community
