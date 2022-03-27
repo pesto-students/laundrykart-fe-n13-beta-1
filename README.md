@@ -54,8 +54,8 @@ You should be able to see the landing page.
 - Password: vendor1@321
 
 #### Rider ####
-- Username: rider@gmail.com
-- Password: rider@321
+- Username: main@gmail.com
+- Password: rider@123
 
 
 ## Testing Card Details
