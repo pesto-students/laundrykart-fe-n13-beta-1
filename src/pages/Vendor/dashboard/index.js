@@ -10,7 +10,10 @@ import { selectCurrentUser } from "../../../store/selector/login.selectors";
 import { ProfileStart } from "../../../store/actions/vendorProfileActions";
 import FullScreenDialog from "../../../components/Vendor/Profilepopup";
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 477d386372b4ca1712b0311c359b082a32eca3a5
 const VendorDashboard = (vendordetails) => {
   const dispatch = useDispatch();
   const laundryId = vendordetails.vendordetails.currentUser.objectId;
