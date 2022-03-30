@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { TextField } from "@mui/material";
+import { Button, Stack, TextField } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { setAuthLayout } from "../../store/actions/layoutActions";
@@ -137,6 +137,43 @@ const Login = ({ loginstatus }) => {
                       Sign up
                     </Link>
                   </Typography>
+                </div>
+                <div className='form-control-area text-center'>
+                  <Typography sx={{fontSize:15}}>
+                      Demo Logins
+                  </Typography>
+                  <Stack
+                    direction="row"
+                    justifyContent="space-around"
+                    alignItems="center"
+                    spacing={2}
+                    mt={2}
+                  >
+                    <Button variant="contained" sx={{ borderRadius: 4, px: 3 }} size="small" color="secondary"
+                      onClick={() => dispatch(LoginStart({
+                        username: "tejal@gmail.com",
+                        password: "tejal@123"
+                      }))}
+                    >
+                      User
+                    </Button>
+                    <Button variant="contained" sx={{ borderRadius: 4, px: 3 }} size="small" color="secondary"
+                    onClick={() => dispatch(LoginStart({
+                      username: "vendor1@gmail.com",
+                      password: "vendor1@321"
+                    }))}
+                    >
+                      Vendor
+                    </Button>
+                    <Button variant="contained" sx={{ borderRadius: 4, px: 3 }} size="small" color="secondary"
+                    onClick={() => dispatch(LoginStart({
+                      username: "main@gmail.com",
+                      password: "rider@123"
+                    }))}
+                    >
+                      Rider
+                    </Button>
+                  </Stack>
                 </div>
               </Box>
             </form>
