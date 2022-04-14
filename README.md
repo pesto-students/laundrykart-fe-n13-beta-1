@@ -1,15 +1,13 @@
-  ![alt text](https://github.com/pesto-students/laundrykart-fe-n13-beta-1/blob/dev-env/src/assets/logo/readmelogo.png)
+  ![alt text](https://github.com/pesto-students/laundrykart-fe-n13-beta-1/blob/dev-env/src/assets/logo/readmelogo.png) 
+  ## LaundryKart
+  LaundryKart is committed to offering our customers the highest quality dry cleaning and laundry services at fair prices. Our goal is to deliver a convenient and easy to use solution while providing excellent customer service.
  ## Table of contents
- - [Introduction](#intro)
- - [Demo](#technologies)
- - [Installation](#setup)
- - [Technology Stack](#features)
- - [Contributors](#contributors)
- - [Community](#Community)
+ - [Demo](#demo)
+ - [Installation](#installation)
+ - [Technology Stack](#technology-stack)
+ - [Contributors](#contributors-)
+ - [License](#license)
  
-## Introduction      
-LaundryKart is committed to offering our customers the highest quality dry cleaning and laundry services at fair prices. Our goal is to deliver a convenient and easy to use solution while providing excellent customer service.
-
 ## Demo
 -[_LaundryKart_](https://laundrykart02.netlify.app/).
 
@@ -70,5 +68,5 @@ You should be able to see the landing page.
 - <a href="https://www.linkedin.com/in/gopi-m-3112ba115/">Gopi Kannan</a>
 
 
-## Community
-Thanks to the people who directly and indirectly supported me to accomplish this project.
+## License
+[MIT](https://opensource.org/licenses/MIT)
